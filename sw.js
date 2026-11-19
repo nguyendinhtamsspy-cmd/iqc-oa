@@ -1,5 +1,5 @@
 /* IQC OA – chỉ lưu vỏ ứng dụng (trang khởi động + biểu tượng) để mở nhanh. Dữ liệu IQC luôn lấy trực tiếp từ máy chủ. */
-const CACHE='iqc-oa-v1';
+const CACHE='iqc-oa-v3';
 const SHELL=['./','index.html','manifest.webmanifest','icons/apple-180.png','icons/icon-192.png','icons/icon-512.png'];
 self.addEventListener('install',e=>{e.waitUntil(caches.open(CACHE).then(c=>c.addAll(SHELL)).then(()=>self.skipWaiting()));});
 self.addEventListener('activate',e=>{e.waitUntil(caches.keys().then(ks=>Promise.all(ks.filter(k=>k!==CACHE).map(k=>caches.delete(k)))).then(()=>self.clients.claim()));});
