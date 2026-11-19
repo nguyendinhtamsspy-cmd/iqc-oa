@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
 <title>IQC OA – SamJin LND Vina</title>
 <meta name="description" content="IQC SMART – Hệ thống kiểm soát chất lượng đầu vào SamJin LND Vina">
 <meta name="theme-color" content="#0b1f3f">
@@ -71,7 +71,7 @@ var TK='iqcOaSession',waitEnter=false;
 function okOrigin(o){try{return /\.googleusercontent\.com$/.test(new URL(o).hostname);}catch(x){return false;}}
 function hideSplash(){clearTimeout(timer);setTimeout(function(){splash.classList.add('hide');},300);}
 window.addEventListener('message',function(e){if(!e.data||!okOrigin(e.origin))return;var m=e.data;
-  if(m.iqc==='ready'){var first=!ready;ready=true;var tk='';try{tk=localStorage.getItem(TK)||'';}catch(x){}
+  if(m.iqc==='ready'){var first=!ready;ready=true;try{e.source.postMessage({iqc:'noZoom'},e.origin);}catch(x){}var tk='';try{tk=localStorage.getItem(TK)||'';}catch(x){}
     if(tk){e.source.postMessage({iqc:'token',token:tk},e.origin);if(first){waitEnter=true;clearTimeout(timer);timer=setTimeout(function(){waitEnter=false;hideSplash();},6000);}}
     else if(!waitEnter)hideSplash();}
   else if(m.iqc==='entered'){waitEnter=false;hideSplash();}
